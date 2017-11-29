@@ -6,7 +6,7 @@
 #    By: pclement <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/11/13 18:57:53 by pclement          #+#    #+#              #
-#    Updated: 2017/11/17 14:56:25 by pclement         ###   ########.fr        #
+#    Updated: 2017/11/29 17:21:57 by pclement         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME): $(SRC) $(OBJ)
 	ar rc libft.a $(OBJ)
 	ranlib libft.a
 
