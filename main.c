@@ -29,5 +29,6 @@ int		main()
 //		write(1, "\n", 1);
 //		i++;
 	}
+	free (line);
 	return (0);
 }

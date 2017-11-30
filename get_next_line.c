@@ -74,75 +74,47 @@ int		get_next_line(const int fd, char **line)
 	size_t			new_line_size;
 	char			buf[BUFF_SIZE + 1];
 	int				read_ret;
+	size_t				i;
 
 	read_ret = 1;
-//	write(1, "TESTa\n", 6);
 	if ((new_line_size = ft_new_line_size(pending_str)) == 0)
 	{
-//		write(1, "TESTb\n", 6);
 		while ((read_ret = read(fd, buf, BUFF_SIZE)))
 		{
-//			write(1, "TESTc\n", 6);
 			buf[read_ret] = '\0';
-//			ft_putstr("\n buf =\t");
-//			ft_putstr((const char *)buf);
 			if (!(pending_str = ft_strjoin((char const *)pending_str, (char const *)buf)))
 				return (-1);
-//			ft_putstr("\n pendingd =\t");
-//			ft_putstr(pending_str);
 			if ((new_line_size = ft_new_line_size(pending_str)) != 0)
 				break;
-//			write(1, "\n", 1);
-//			ft_putnbr(new_line_size);
-//			write(1, "\n", 1);
-//			write(1, "TESTd\n", 6);
 		}
 	}
-//ft_putnbr(read_ret);
+	ft_putnbr(read_ret);
 
-//	write(1, "\nTESTe\n", 7);
+	write(1, "\nTESTa\n", 7);
 	line_index++;
-//	ft_putnbr(line_index);
-//	ft_putstr("\n");
 	if (read_ret == 0)
 		new_line_size = ft_strlen(pending_str);
-/*		write(1, "TESTg\n", 6);
 	
-	ft_putstr("\n pendinge =\t");
-	ft_putnbr(new_line_size);
-	ft_putstr("\n");
-	ft_putstr("\n pendingf =\t");
-	ft_putnbr(line_index);
-	ft_putstr("\n");
-	ft_putstr("\n pendingg =\t");
-	ft_putstr(pending_str);
-	ft_putstr("\n");
-	*/
+	write(1, "\nTESTb\n", 7);
 	total_size = total_size + sizeof(char)*(new_line_size + 1);
 	if (!(line = ft_realloc(line, line_index, total_size)))
 		return (-1);
+	write(1, "\nTESTc\n", 7);
 	if (!(line[line_index] = ft_strnew(new_line_size)))
 		return (-1);
-//	write(1,&(line[line_index][1]),1);
-//	ft_putstr("\n pendingf =\t");
-//	ft_putstr(pending_str);
-//	write(1, "TESTf\n", 6);
-//	ft_putstr("\n pending_g =\t");
-//	ft_putstr(pending_str);
-//	ft_putstr(line[line_index]);
-//	write(1,"\n",1);
-//	write(1,"\n",1);
-//	write(1, "TESTg\n", 6);
-//	ft_putstr("\n pendinge =\t");
-	//ft_putnbr(new_line_size);
-//	ft_putstr("\n");
-
-	ft_strncpy(line[line_index], (const char *)pending_str, new_line_size);
+	i = -1;
+//	while (i++ < new_line_size)
+		line[line_index][0] = '\0';
+	write(1, "\nTESTd\n", 7);
+	line[line_index] = ft_strncpy(line[line_index], (const char *)pending_str, new_line_size);
+	ft_putstr(line[line_index]);
+//	write(1, "\nTESTe\n", 7);
+	ft_putstr("\npending_str avant resize =\t");
+	ft_putstr(pending_str);
+	ft_putstr("?\n\n");
 	pending_str = ft_new_pending_str(pending_str);
-//	write(1, "TESTh\n", 6);
-//	write(1, "\n", 1);
-//	ft_putstr("\n pendingh =\t");
-//	ft_putstr(pending_str);
+
+// PROBLEMENE AC INITIALISATION LIN LINE INDEX 0 SI UN SEUL CA MARCHE
 
 
 	ft_putstr("FINAL FIN GNL\n");
@@ -161,14 +133,20 @@ int		get_next_line(const int fd, char **line)
 
 	ft_putstr("pending_str =\t");
 	ft_putstr(pending_str);
-	ft_putstr("\n\n");
+	ft_putstr("?\n\n");
 
 	ft_putstr("line_index =\t");
 	ft_putnbr(line_index);
 	ft_putstr("\n\n");
 
+	ft_putstr("line[line_index][0] =\t");
+	write(1, &(line[line_index][0]),1);
+//	write(1, &(line[line_index][1]),1);
+//	write(1, &(line[line_index][2]),1);
+//	write(1, &(line[line_index][3]),1);
+	ft_putstr("\n\n");
 	ft_putstr("line[line_index] =\t");
 	ft_putstr(line[line_index]);
-	ft_putstr("\n\n");
+	ft_putstr("?\n\n");
 	return (read_ret >= 1 ? 1 : read_ret);
 }
