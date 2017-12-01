@@ -25,10 +25,11 @@ int		get_next_line(const int fd, char **line)
 
 //cmt initialiser la var ?
 
-	if (!line || fd < 0)
-		return (-1);
 	// mettre les tests 
 	//
+	if (!line || fd < 0)
+		return (-1);
+
 	if (!leftover_str[fd])
 		leftover_str[fd] = "";
 
@@ -46,7 +47,7 @@ int		get_next_line(const int fd, char **line)
 	}
 //				ft_putstr("TESTA\n");
 	
-	if (leftover_str[fd][0] == 0)
+	if (leftover_str[fd] == 0)
 		return (0);
 
 	*line = ft_strnew(new_line_index);
@@ -58,10 +59,10 @@ int		get_next_line(const int fd, char **line)
 	if (tmp)
 		free (tmp);
 
-//				ft_putstr(*line);
-//				ft_putstr("?");
-//				ft_putnbr(ret);
-//				ft_putstr("?");
+				ft_putstr(*line);
+				ft_putstr("?");
+				ft_putnbr(ret);
+				ft_putstr("?");
 
 	// a l air ok pour le print essayer ac chaine vide, rajouter etteurs et changer buff size. essayer tests ecole pui 42File checker
 	// pb ac la valeur de retour

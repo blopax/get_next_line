@@ -25,10 +25,11 @@ int		get_next_line(const int fd, char **line)
 
 //cmt initialiser la var ?
 
-	if (!line || fd < 0)
-		return (-1);
 	// mettre les tests 
 	//
+	if (!line || fd < 0)
+		return (-1);
+
 	if (!leftover_str[fd])
 		leftover_str[fd] = "";
 
@@ -46,7 +47,7 @@ int		get_next_line(const int fd, char **line)
 	}
 //				ft_putstr("TESTA\n");
 	
-	if (leftover_str[fd][0] == 0)
+	if (leftover_str[fd] == 0)
 		return (0);
 
 	*line = ft_strnew(new_line_index);

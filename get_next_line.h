@@ -17,6 +17,7 @@
 
 # include <stdlib.h>
 # include <unistd.h>
+# include <limits.h>
 #include "libft/includes/libft.h"
 
 int		get_next_line(const int fd, char **line);
