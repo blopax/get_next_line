@@ -41,15 +41,17 @@ int		get_next_line(const int fd, char **line)
 	if (!line || fd < 0)
 		return (-1);
 	if (!leftover_str[fd])
-		leftover_str[fd] = "";
+		leftover_str[fd] = ft_strnew(0);
 	while ((ret = read(fd, buf, BUFF_SIZE)) >  0)
 	{
 		buf[ret] = '\0';
 		if (!(tmp = ft_strjoin(leftover_str[fd], buf)))
 			return (-1);
-		leftover_str[fd] = ft_strdup(tmp);
+		free(leftover_str[fd]);
+		leftover_str[fd] = ft_strdup(tmp);;
+		free(tmp);
 //	si je commente la ligne au dessus ac ft_strdup 0 leaks...
-free(tmp);
+//free(tmp);
 		if ((ft_new_line_index(leftover_str[fd])) != ft_strlen(leftover_str[fd]))
 			break;
 	}
@@ -62,7 +64,10 @@ free(tmp);
 	*line = ft_strnew(new_line_index);
 	ft_strncpy(*line, leftover_str[fd], new_line_index);
 	tmp = ft_strsub(leftover_str[fd], new_line_index + 1, ft_strlen(leftover_str[fd]) - new_line_index);
-	leftover_str[fd] = ft_strdup(tmp);
+	leftover_str[fd] = 0;
+	free(leftover_str[fd]);
+	leftover_str[fd] = tmp;
+	tmp = 0;
 	free (tmp);
 	return (1);
 }
