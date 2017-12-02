@@ -22,4 +22,12 @@
 
 int		get_next_line(const int fd, char **line);
 
+typedef struct	s_read
+{
+	char	buf[BUFF_SIZE + 1];
+	char	*tmp;
+	int			ret;
+}				t_reading;
+
+
 #endif
